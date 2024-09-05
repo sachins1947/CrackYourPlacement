@@ -1,0 +1,17 @@
+class Solution {
+    public int maxProfit(int[] a) {
+        int n  = a.length;
+        int max_profit = 0;
+         int min_price = a[0];
+        for(int i=1;i<n;i++){
+          int current_profit = a[i] -min_price;
+          if(current_profit>max_profit){
+             max_profit = current_profit;
+          }
+          if(min_price>a[i]){
+            min_price = a[i];
+          }
+        }
+        return max_profit;
+    }
+}
