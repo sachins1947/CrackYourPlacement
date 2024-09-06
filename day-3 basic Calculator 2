@@ -1,0 +1,37 @@
+class Solution {
+    public int calculate(String s) {
+        Stack<Integer> stack = new Stack<Integer>();
+        int result= 0;
+        int num =0;
+        char operator= '+';
+          s = s.replaceAll(" ", "");
+        for(int i=0;i<s.length();i++){
+         char currentchar= s.charAt(i);
+         
+         if(Character.isDigit(currentchar)){
+            num = num*10 + currentchar - '0';
+         }
+         
+    if((!Character.isDigit(currentchar)) || i==(s.length()-1)){
+        if(operator=='+'){
+            stack.push(+num);
+        }
+        if(operator=='-'){
+            stack.push(-num);
+        }
+        if(operator=='*'){
+         stack.push(stack.pop()*num);
+        }
+        if(operator=='/'){
+            stack.push(stack.pop()/num);
+        }
+        num =0;
+        operator = currentchar;
+    }
+        }
+        while(!stack.isEmpty()){
+            result += stack.pop();
+        }
+        return result;
+    }
+}
