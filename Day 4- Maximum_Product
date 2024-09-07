@@ -1,0 +1,9 @@
+class Solution {
+    public int maximumProduct(int[] a) {
+        int n = a.length;
+      Arrays.sort(a);
+    int max1 = a[n-1]*a[n-2]*a[n-3];
+    int max2 = a[0]*a[1]*a[n-1];
+    int sum = Math.max(max1,max2);
+         return sum;
+}}
