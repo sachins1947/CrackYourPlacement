@@ -1,0 +1,35 @@
+class Solution {
+    public int strStr(String haystack, String needle) {
+        if(haystack.length()<needle.length()){
+            return -1;
+        }
+        if(haystack.length()==1 && needle.length()==1){
+            char a = haystack.charAt(0);
+            char b= needle.charAt(0);
+            if(a==b) return 0;
+            else
+            return -1;
+        }
+        String ans = "";
+        int j=0;
+        int start_index= -1;
+      for(int i=0;i<haystack.length();i++){
+            char current = haystack.charAt(i);
+            char find = needle.charAt(0);
+            if(current==find){
+            start_index = i;
+            int s = i;
+            while(j<needle.length() && s<haystack.length()){
+               ans += haystack.charAt(s);
+               s++;
+               j++;
+            }
+            if(ans.equals(needle)){
+                return start_index;
+            }
+            j=0;
+            ans = "";
+            }
+      }
+      return -1;
+}}
