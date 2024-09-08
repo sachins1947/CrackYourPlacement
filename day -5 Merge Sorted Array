@@ -1,0 +1,28 @@
+class Solution {
+    public void merge(int[] a, int m, int[] b, int n) {
+        int i=0;
+        int j=0;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+           while(i<m && j<n){
+            if(a[i]<=b[j]){
+             list.add(a[i]);
+             i++;
+            }
+            else{
+                list.add(b[j]);
+                j++;
+            }
+           }
+           while(i<m){
+            list.add(a[i]);
+            i++;
+           }
+           while(j<n){
+            list.add(b[j]);
+            j++;
+           }
+      for(int k=0;k<(n+m);k++){
+        a[k] = list.get(k);
+      }
+            }
+}
