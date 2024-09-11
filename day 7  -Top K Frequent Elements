@@ -1,0 +1,36 @@
+class pair{
+    int value;
+    int count;
+    pair(int value,int count){
+        this.value = value;
+        this.count = count;
+    }
+}
+class Solution {
+    public int[] topKFrequent(int[] a, int k) {
+         PriorityQueue<pair> pq = new PriorityQueue<>((p1, p2) -> p2.count - p1.count);
+       ArrayList<Integer> list = new ArrayList<>();
+       LinkedHashMap<Integer, Integer> map = new LinkedHashMap<>();
+         int b[] =new int[k];
+         for(int i=0;i<a.length;i++){
+            if(!map.containsKey(a[i])){
+                map.put(a[i],1);
+            }
+            else{
+             map.put(a[i],map.get(a[i])+1);
+            }
+         }
+    for(Map.Entry<Integer,Integer> e : map.entrySet()){
+         pq.add(new pair(e.getKey(),e.getValue()));
+    };
+    int c= 0;
+    while(!pq.isEmpty() && k!=c){
+        pair current= pq.poll();
+          b[c] = current.value;
+          c++;  
+        }
+        
+    return b;
+    }
+
+}
