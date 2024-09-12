@@ -1,0 +1,26 @@
+class GfG
+{
+    int maxLen(int arr[], int n)
+    {
+       int max_length = Integer.MIN_VALUE;
+       int prefix_sum = 0;
+       HashMap<Integer,Integer> map = new HashMap<>();
+       for(int i=0;i<arr.length;i++){
+           prefix_sum += arr[i];
+          if(prefix_sum==0){
+          max_length= Math.max(max_length,i+1);
+          continue;
+          }
+           if(map.containsKey(prefix_sum)){
+            max_length = Math.max(max_length,i-map.get(prefix_sum));
+           }
+           else{
+               map.put(prefix_sum,i);
+           }
+       }
+       if(max_length==Integer.MIN_VALUE){
+           return 0;
+       }
+       return max_length;
+    }
+}
