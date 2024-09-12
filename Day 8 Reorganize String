@@ -1,0 +1,51 @@
+class Pair {
+    char value;
+    int count;
+    Pair(char value, int count) {
+        this.value = value;
+        this.count = count;
+    }
+}
+
+class Solution {
+    public String reorganizeString(String s) {
+        PriorityQueue<Pair> p = new PriorityQueue<Pair>((p1, p2) -> p2.count - p1.count);
+        StringBuilder str = new StringBuilder();
+        HashMap<Character, Integer> map = new HashMap<>();
+
+       
+        for (int i = 0; i < s.length(); i++) {
+            char current = s.charAt(i);
+            map.put(current, map.getOrDefault(current, 0) + 1);
+        }
+
+       
+        for (Map.Entry<Character, Integer> e : map.entrySet()) {
+            p.add(new Pair(e.getKey(), e.getValue()));
+        }
+        if (!p.isEmpty() && p.peek().count > (s.length() + 1) / 2) {
+            return "";
+        }
+
+        while (p.size() > 1) {
+            Pair current = p.poll();
+            Pair next = p.poll();
+            str.append(current.value);
+            str.append(next.value);
+            current.count--;
+            next.count--;
+            if (current.count > 0) {
+                p.add(new Pair(current.value, current.count));
+            }
+            if (next.count > 0) {
+                p.add(new Pair(next.value, next.count));
+            }
+        }
+
+        if (!p.isEmpty()) {
+            str.append(p.poll().value);
+        }
+
+        return str.toString();
+    }
+}
