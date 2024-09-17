@@ -1,0 +1,36 @@
+class Solution {
+    public String longestCommonPrefix(String[] str) {
+        int min_index = -1;
+        int str_length = Integer.MAX_VALUE;
+        for(int i=0;i<str.length;i++){
+           if(str_length>str[i].length()){
+             str_length = str[i].length();
+             min_index = i;
+           }
+        }
+        String comm_prefix= str[min_index];
+     for(int i=0;i<str.length;i++){
+        if(i!=min_index){
+         String find_in = str[i];
+         int low=0;
+         int high = 0;
+         int min = Math.min(comm_prefix.length(),find_in.length());
+         String ans = "";
+         while(low<min && high<min){
+            char a=comm_prefix.charAt(low);
+            char b=find_in.charAt(high);
+            if(a==b){
+                ans +=a;
+              low++;
+              high++;
+            }
+            else{
+          comm_prefix= ans;
+                break;
+            }
+         }
+        }
+     }
+      return comm_prefix; 
+    }
+}
