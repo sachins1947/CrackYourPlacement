@@ -1,0 +1,15 @@
+class Solution {
+    public int  sum =0;
+    public int sumOfLeftLeaves(TreeNode root) {
+         leftsum(root);
+         return sum;
+    }
+    void leftsum(TreeNode root){
+        if(root==null ||(root.left==null && root.right==null)) return;
+        if( root.left!=null && root.left.left==null && root.left.right==null){
+          sum += root.left.val;
+        }
+        leftsum(root.left);
+        leftsum(root.right);
+     }
+}
