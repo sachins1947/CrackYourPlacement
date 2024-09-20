@@ -1,0 +1,19 @@
+class Solution {
+    public int maxScore(int[] a, int k) {
+        int left_score=0;
+        int right_score=0;
+       for(int i=0;i<k;i++){
+              left_score +=a[i];
+       }
+       int j=0;
+         j=a.length-1;
+       int max_score= left_score;
+       for(int i=k-1;i>=0;i--){
+         left_score -=a[i];
+         right_score +=a[j];
+         max_score = Math.max(max_score,left_score+right_score);
+         j--;
+       }
+       return max_score;
+    }
+}
