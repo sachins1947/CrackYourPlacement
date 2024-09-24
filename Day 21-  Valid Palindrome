@@ -1,0 +1,41 @@
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        
+        if(head.next==null) return true;
+      ListNode cur = head;
+      int count = 0;
+      while(cur!=null){
+         cur = cur.next;
+         count++;
+      }
+
+     cur = head;
+     count =count/2;
+   int   k=0;
+     ListNode prev = null;
+    while(cur!=null && count!=k){
+         prev = cur;
+         cur= cur.next;
+         k++;
+    }
+    while(cur!=null){
+        ListNode temp = cur.next;
+         cur.next =prev;
+         prev =cur;
+         cur = temp;
+    }
+     ListNode start =head;
+     ListNode end = prev;
+     k=0;
+     while(k!=count){
+      if(start.val!=end.val){
+        return false;
+      }
+      start = start.next;
+      end = end.next;
+      k++;
+     }
+     return true;
+    }
+}
