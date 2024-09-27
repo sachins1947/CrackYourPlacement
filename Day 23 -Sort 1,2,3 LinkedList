@@ -1,0 +1,57 @@
+class Solution {
+    // Function to sort a linked list of 0s, 1s and 2s.
+    static Node segregate(Node head) {
+         int count0 = 0;
+         int count1 = 0;
+         int count2=  0;
+          Node cur = head;
+          Node prev =null;
+          Node start = null;
+         while(cur!=null){
+             if(cur.data==0) count0++;
+             if(cur.data==1)  count1++;
+             if(cur.data==2) count2++;
+             cur =cur.next;
+         }
+         int count =0;
+         while(count!=count0){
+             Node root= new Node(0);
+             if(prev==null){
+              prev =root;
+              start= root;
+              count++;
+              continue;
+             }
+             prev.next = root;
+             prev= root;
+             count++;
+         }
+         count =0;
+         while(count!=count1){
+            Node root = new Node(1);
+             if(prev==null){
+                 prev =root;
+              start= root;
+              count++;
+              continue;
+             }
+            prev.next = root;
+            prev = root;
+            count++;
+         }
+         count =0;
+         while(count!=count2){
+             Node root = new Node(2);
+             if(prev==null){
+                 prev =root;
+              start= root;
+              count++;
+              continue;
+             }
+             prev.next = root;
+             prev=root;
+             count++;
+         }
+         return start;
+    }
+}
