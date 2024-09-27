@@ -1,0 +1,27 @@
+
+class Solution {
+    public int getDecimalValue(ListNode head) {
+        int decimal_value =0;
+        int count = 0;
+        ListNode cur= reverse(head);
+        while(cur!=null){
+          if(cur.val==1){
+        decimal_value += Math.pow(2,count); 
+          }
+          cur =cur.next;
+          count++;
+        }
+        return decimal_value;
+    }
+    ListNode reverse(ListNode head){
+        ListNode cur = head;
+        ListNode prev = null;
+        while(cur!=null){
+            ListNode temp = cur.next;
+            cur.next =prev;
+             prev =cur;
+             cur = temp;
+        }
+        return prev;
+    }
+}
