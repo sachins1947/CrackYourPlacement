@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.List;
+public class Solution {
+       static TreeNode prev = null; 
+    static TreeNode succ = null;
+    public static List<Integer> predecessorSuccessor(TreeNode root, int key) {
+          inorder(root, key);
+        succorder(root,key);
+       List<Integer>  list = new ArrayList<>();
+        if(prev!=null){
+         list.add(prev.data);
+        }
+        else{
+         list.add(-1);
+        }
+        if(succ!=null){
+         list.add(succ.data);
+        }
+        else{
+
+          list.add(-1);
+        }
+         return list;
+    }
+
+     static void inorder(TreeNode root, int key) {
+        if (root == null) return;
+        
+        inorder(root.left, key);
+
+        if (root.data == key) {
+            return; 
+        }
+        if(root.data<key){
+        prev = root;
+}
+        inorder(root.right, key);
+    }
+    static void succorder(TreeNode cur,int key){
+        if(cur==null) return;
+        if(cur.data==key){
+            if(cur.right!=null){
+               TreeNode temp =cur.right;
+               succ = temp;
+               while(temp.left!=null){
+                   temp =temp.left;
+               }
+               succ =temp;
+            }
+            
+            return;
+        }
+        if(cur.data>key){
+          succ = cur;
+        succorder(cur.left,key);
+        }
+        else{
+        succorder(cur.right,key);
+        }
+    }
+    }
