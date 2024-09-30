@@ -1,0 +1,19 @@
+lass Solution {
+    public long multiplyTwoLists(Node first, Node second) {
+      Node cur1 = first;
+      Node cur2 = second;
+      long multiply1 = 0;
+      long multiply2 = 0;
+      while(cur1!=null){
+         multiply1 = (10*multiply1 + cur1.data)%1000000007;
+         cur1 = cur1.next;
+      }
+      while(cur2!=null){
+           multiply2= (10*multiply2+ cur2.data)%1000000007;
+          cur2 =cur2.next;
+      }
+      return ( multiply1*multiply2)%1000000007;
+    //   return (multiply1*multiply2);
+    //   %(long)(Math.pow(10,9)+7);
+    } 
+}
