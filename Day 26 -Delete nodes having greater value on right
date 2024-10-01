@@ -1,0 +1,35 @@
+class Solution {
+    Node compute(Node head) {
+      Node cur = reverse(head);
+      Node cur1= cur;
+      Node prev =null;
+      while(cur1!=null){
+          if(prev==null){
+              prev= cur;
+              cur1 =cur1.next;
+          }
+          if(cur1.data>=prev.data){
+              prev = cur1;
+              cur1 =cur1.next;
+          }
+          else{
+          Node temp = cur1.next;
+          cur1.next=null;
+          prev.next =temp;
+          cur1 =temp;
+          }
+      }
+      return reverse(cur);
+    }
+     Node reverse(Node head){
+         Node cur=  head;
+         Node prev =null;
+         while(cur!=null){
+             Node temp =cur.next;
+              cur.next =prev;
+              prev=  cur;
+              cur = temp;
+         }
+         return prev;
+     }
+}
