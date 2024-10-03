@@ -1,0 +1,25 @@
+class Solution
+{
+    public static boolean isDeadEnd(Node root)
+    {
+      ArrayList<Integer> list = new ArrayList<>();
+       inorder(root,list);
+      return check(root,list);
+    }
+   static void inorder(Node root,ArrayList<Integer> list){
+         if(root!=null){
+            inorder(root.left,list);
+            list.add(root.data);
+            inorder(root.right,list);
+         }
+    }
+  static     boolean check(Node root,ArrayList<Integer> list){
+        if(root==null) return false;
+        if(root.left==null && root.right==null){
+          if((list.contains(root.data-1) || root.data-1<=0) && list.contains(root.data+1)){
+              return true;
+          }
+        }
+   return check(root.left,list) || check(root.right,list);
+    }
+}
