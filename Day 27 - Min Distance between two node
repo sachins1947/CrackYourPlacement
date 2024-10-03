@@ -1,0 +1,55 @@
+class GfG {
+    ArrayList<Integer> list1 = new ArrayList<>();
+    ArrayList<Integer> list2 = new ArrayList<>();
+    
+    int findDist(Node root, int a, int b) {
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        traversalA(root, list, a);
+        list.clear();  
+        traversalB(root, list, b);
+        
+        int i = 0;
+        
+        while (i < list1.size() && i < list2.size()) {
+            if (!list1.get(i).equals(list2.get(i))) {
+                break;
+            }
+            i++;
+        }
+        
+        return ((list1.size() - i) + (list2.size() - i));
+    }
+    
+   
+    void traversalA(Node root, ArrayList<Integer> list, int key) {
+        if (root == null) return;
+        
+      
+        list.add(root.data);
+        
+        if (root.data == key) {
+            list1.addAll(list);
+            return;
+        }
+        
+      
+        traversalA(root.left, list, key);
+        traversalA(root.right, list, key);
+        
+        
+        list.remove(list.size() - 1);
+    }
+    void traversalB(Node root, ArrayList<Integer> list, int key) {
+        if (root == null) return;
+       
+        list.add(root.data);
+        if (root.data == key) {
+            list2.addAll(list);
+            return;
+        }
+        traversalB(root.left, list, key);
+        traversalB(root.right, list, key);
+        list.remove(list.size() - 1);
+    }
+}
