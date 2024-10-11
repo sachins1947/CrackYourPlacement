@@ -1,0 +1,41 @@
+
+class Solution {
+    class pair{
+        char c;
+        int count;
+        pair(char c,int count){
+            this.c= c;
+            this.count = count;
+        }
+    }
+    public String removeDuplicates(String s, int k) {
+        String ans=  "";
+        Stack<pair> stack =   new Stack<>();
+        for(int i=s.length()-1;i>=0;i--){
+            char current = s.charAt(i);
+        while(!stack.isEmpty() && k==stack.peek().count){
+            stack.pop();
+        }
+        if(!stack.isEmpty() && stack.peek().c==current){
+            stack.peek().count += 1;
+            if(i==0 && stack.peek().count==k){
+               stack.pop();
+            }
+        }
+        else{
+            stack.push(new pair(current,1));
+        }
+        
+        }
+        while(!stack.isEmpty()){
+         pair current = stack.pop();
+         int count = current.count;
+         char cur = current.c;
+           while(count>0){
+            ans +=cur;
+            count--;
+           }
+        }
+        return ans;
+    }
+}
