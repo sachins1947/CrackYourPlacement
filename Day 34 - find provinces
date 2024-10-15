@@ -1,0 +1,37 @@
+class Solution {
+    public int findCircleNum(int[][] isConnected) {
+    ArrayList<ArrayList<Integer>> x = new ArrayList<>();
+    Queue<Integer> q = new LinkedList<>();
+    int n = isConnected.length;
+    int count = 0;
+    for(int i=0;i<n;i++){
+        x.add(new ArrayList<>());
+        for(int j=0;j<n;j++){
+            if(isConnected[i][j]==1 && i!=j){
+           x.get(i).add(j);
+            }
+        }
+    }
+    boolean vis[] = new boolean[n];
+    for(int i=0;i<n;i++){
+     if(!vis[i]){
+        vis[i] = true;
+        q.add(i);
+     findprovince(vis,x,q);
+     count++;
+     }
+    }
+    return count;
+    }
+    void findprovince(boolean vis[],ArrayList<ArrayList<Integer>> x,Queue<Integer> q ){
+        if(q.isEmpty()) return;
+        int node = q.poll();
+        for(Integer it : x.get(node)){
+          if(!vis[it]){
+            vis[it] = true;
+            q.add(it);
+         findprovince(vis,x,q);
+          }
+        }
+    }
+}
