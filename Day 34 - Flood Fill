@@ -1,0 +1,22 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+     int n = image.length;
+     int m =  image[0].length;
+     int value = image[sr][sc];
+    int direction[][] ={{-1, 0},{1, 0},{0, -1},{0, 1}};
+    boolean vis[][] = new boolean[n][m];
+     dfs(sr,sc,vis,image,direction,n,m,color,value);
+    return image;   
+    }
+ void dfs(int row,int col,boolean vis[][],int[][] grid, int direction[][],int n,int m,int color,int value){
+        vis[row][col] =true;
+        grid[row][col] =color;
+        for(int[] dir : direction){
+            int nrow = row + dir[0];
+            int ncol = col + dir[1];
+     if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && grid[nrow][ncol]==value && !vis[nrow][ncol]){
+         dfs(nrow,ncol,vis,grid,direction,n,m,color, value);
+     }
+        }
+    }
+}
