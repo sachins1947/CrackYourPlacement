@@ -1,0 +1,46 @@
+class pair{
+    int row;
+    int col;
+    int count;
+    pair(int row,int col,int count){
+        this.row =row;
+        this.col = col;
+        this.count = count;
+    }
+}
+class Solution
+{
+
+    public int minStepToReachTarget(int KnightPos[], int TargetPos[], int n)
+    {
+        int direction[][] = {{-2, 1}, {2, 1}, {2, -1}, {-2, -1}, {-1, -2}, {1, -2}, {-1, 2}, {1, 2}};
+        boolean vis[][] = new boolean[n][n];
+        int source_row = KnightPos[0] - 1;
+        int source_col = KnightPos[1] - 1;
+        int target_row = TargetPos[0] - 1;
+        int target_col = TargetPos[1] - 1;
+       if(source_row==target_row && source_col==target_col) return 0;
+        Queue<pair> q = new LinkedList<>();
+        q.add(new pair(source_row,source_col,0));
+        vis[source_row][source_col] =true;
+        while(!q.isEmpty()){
+            pair current =  q.poll();
+          for(int[] dir : direction){
+              int nrow= current.row + dir[0];
+              int ncol = current.col + dir[1];
+             if(nrow==target_row && ncol==target_col){
+                 return current.count+1;
+             }
+        if(nrow>=0 && nrow<n && ncol>=0 && ncol<n && !vis[nrow][ncol]){      
+             vis[nrow][ncol] = true;
+             q.add(new pair(nrow,ncol,current.count+1));
+        }
+          }
+        }
+        return -1;
+    }
+
+    {
+       
+    }
+}
