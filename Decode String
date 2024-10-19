@@ -1,0 +1,56 @@
+class Solution {
+    public String decodeString(String s) {
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Character> s2 = new Stack<>();
+       StringBuilder result = new StringBuilder();
+       String digit= "";
+        for(int m=0;m<s.length();m++){
+            char ch = s.charAt(m);
+            if(Character.isDigit(ch)){
+             digit +=  ch;
+            if(m<s.length() && !Character.isDigit(s.charAt(m+1))){
+            s1.push(Integer.parseInt(digit));
+            digit ="";
+            }}
+           else{
+           if(ch!=']'){
+            if(s1.isEmpty()){
+                result.append(ch);
+            }
+            else{
+            s2.push(ch);
+            }
+           }
+           else{
+            String ans = "";
+         while(!s2.isEmpty() && s2.peek()!='['){
+              ans += s2.pop();
+         }
+         s2.pop();
+         int size = s1.pop();
+         if(s1.isEmpty()){
+            String temp = "";
+            int j=0;
+            while(j<size){
+           for(int i =ans.length()-1;i>=0;i--){
+                  temp += ans.charAt(i);
+           }
+           j++;}
+         result.append(temp);
+         }
+         else{
+           int i=0;
+          while(i<size){
+           for(int j=ans.length()-1;j>=0;j--){
+            s2.push(ans.charAt(j));
+           }
+           i++;
+          }
+         }
+         
+           }
+           } 
+        }
+    return result.toString();
+    }
+}
