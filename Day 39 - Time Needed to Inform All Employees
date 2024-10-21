@@ -1,0 +1,37 @@
+class pair{
+    int employee;
+    int man;
+    pair(int employee,int man){
+        this.employee = employee;
+        this.man= man;
+    }
+}
+class Solution {
+    public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
+        ArrayList<ArrayList<Integer>> x =new ArrayList<>();
+        boolean vis[] = new boolean[n];
+        for(int i=0;i<n;i++){
+            x.add(new ArrayList<>());
+        }
+        for(int i=0;i<n;i++){
+            if(manager[i]!=-1){
+            x.get(manager[i]).add(i);
+            }
+        }
+       bfs(headID,informTime,vis,x);
+       int time = 0;
+       for(int i=0;i<n;i++){
+        time = Math.max(time,informTime[i]);
+       }
+      return time; 
+    }
+    void bfs(int manager,int time[],boolean vis[],ArrayList<ArrayList<Integer>> x){
+        vis[manager] = true;
+        for(Integer it : x.get(manager)){
+            if(!vis[it]){
+             time[it] += time[manager];
+                bfs(it,time,vis,x);
+            }
+        }
+    }
+}
