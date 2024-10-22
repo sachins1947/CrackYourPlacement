@@ -1,1 +1,22 @@
-
+class Solution {
+    public int maxProduct(int[] a) {
+      int n = a.length;
+    int dp_max[] = new int[n];
+    int dp_min[] = new int[n];
+    dp_max[0]= a[0];
+    dp_min[0] = a[0];
+    int max = a[0];
+    for(int i=1;i<n;i++){
+        if(a[i]>=0){
+     dp_max[i] = Math.max(a[i],dp_max[i-1]*a[i]);
+     dp_min[i] =  Math.min(a[i],dp_min[i-1]*a[i]);
+        }
+        else{
+     dp_max[i] = Math.max(a[i],dp_min[i-1]*a[i]);
+     dp_min[i] =  Math.min(a[i],dp_max[i-1]*a[i]);
+        }
+      max = Math.max(max,dp_max[i]);
+    }
+    return max;
+    }
+}
