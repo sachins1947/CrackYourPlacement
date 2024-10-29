@@ -1,0 +1,24 @@
+class Solution {
+    public int max_moves = 0;
+    public int maxMoves(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+     int direction[][] = {{-1,1},{0,1},{1,1}};
+     boolean vis[][] = new boolean[n][m];
+     for(int i=0;i<n;i++){
+      dfs(i,0,vis,grid,direction,n,m,0);
+     }  
+     return max_moves;      
+    }
+    void  dfs(int row,int col,boolean vis[][],int grid[][],int direction[][],int n,int m,int count){
+        vis[row][col] =true;
+        for(int[] dir : direction){
+           int nrow = row+ dir[0];
+           int ncol = col+ dir[1];
+        if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && !vis[nrow][ncol] && grid[nrow][ncol]>grid[row][col]){
+            dfs(nrow,ncol,vis,grid,direction,n,m,count+1);
+            max_moves = Math.max(max_moves,count+1);
+        }
+        }
+    }
+}
